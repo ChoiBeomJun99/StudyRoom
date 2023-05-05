@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Main</title>
+</head>
+<body>
+
+<h1>관리자 메인 페이지 입니다. 스터디 룸 추가 및 삭제와 설명 추가를 할 수 있습니다.</h1>
+
+<h2>타임리프를 통해 현재 존재하는 방을 출력해줄 예정</h2>
+
+
+<br>
+<form method="post" action="admin/add">
+  <input type="text" id = "add_id">
+<button type="submit">스터디룸 추가</button>
+
+</form>
+<br>
+<form method="post" action="admin/remove">
+  <input type="text" id = "remove_id">
+  <button type="submit">스터디룸 제거</button>
+
+
+</form>
+
+<br>
+<form method="get" action="admin/change">
+  <input type="text" id = "change_id">
+  <button type="submit">스터디룸 제거</button>
+
+</form>
+
+</body>
+</html>
