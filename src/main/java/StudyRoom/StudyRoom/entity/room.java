@@ -3,6 +3,7 @@ package StudyRoom.StudyRoom.entity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
 
 @Entity
 public class room {
@@ -15,6 +16,10 @@ public class room {
 
     // 수용 가능 인원
     Integer roomPerson;
+
+    // 스터티 룸 설명
+    @Lob
+    String information;
 
 
 

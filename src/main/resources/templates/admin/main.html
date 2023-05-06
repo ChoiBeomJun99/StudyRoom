@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Admin Main</title>
@@ -12,14 +12,12 @@
 
 
 <br>
-<form method="post" action="admin/add">
-  <input type="text" id = "add_id">
-<button type="submit">스터디룸 추가</button>
 
-</form>
+<button type="submit" onclick="location.href='/admin/add'">스터디룸 추가</button>
+
 <br>
 <form method="post" action="admin/remove">
-  <input type="text" id = "remove_id">
+  <input type="text" name = "remove_id">
   <button type="submit">스터디룸 제거</button>
 
 
@@ -27,8 +25,8 @@
 
 <br>
 <form method="get" action="admin/change">
-  <input type="text" id = "change_id">
-  <button type="submit">스터디룸 제거</button>
+  <input type="text" name = "change_id">
+  <button type="submit">스터디룸 설명 변경</button>
 
 </form>
 
