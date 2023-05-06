@@ -49,9 +49,10 @@ public class AdminController {
 
     @PostMapping("/admin/add")
     public String AddRoom(@RequestParam("add_name") String add_name,@RequestParam("add_person") Long add_person,
-                          @RequestParam("add_price") Long add_price, @RequestParam("add_information") String add_information ){
+                          @RequestParam("add_price") Long add_price, @RequestParam("add_information") String add_information,Model model ){
+
         // 룸 정상 추가 성공 시
-        // 이미 존재하는 룸이면
+
         if(roomRepository.findByroomName(add_name).isEmpty()){
 
 
@@ -61,18 +62,16 @@ public class AdminController {
             roomDto roomDto = new roomDto(roomRepository);
             roomDto.create_room(add_name,add_person,add_price,add_information);
 
-            return "admin/main";
+            return "redirect:/admin";
         }
 
         // 이미 존재하는 룸이면
+
         else{
 
-            System.out.println("실패 시");
-            System.out.println(roomRepository.findByroomName(add_name));
-            // 이미 존재하는 룸인 알림 표시 후 redirect
+            model.addAttribute("add_fail","이미 존재하는 스터디 룸 입니다.");
 
-
-            return "admin/main";
+            return "admin/add_fail";
 
         }
 
