@@ -1,10 +1,9 @@
-package StudyRoom.StudyRoom.Dto;
+package StudyRoom.StudyRoom.Room;
 
 import StudyRoom.StudyRoom.entity.room;
 import StudyRoom.StudyRoom.repository.roomRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 
 @RequiredArgsConstructor
 public class roomDto {

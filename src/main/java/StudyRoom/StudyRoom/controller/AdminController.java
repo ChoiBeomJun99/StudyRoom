@@ -1,7 +1,7 @@
 package StudyRoom.StudyRoom.controller;
 
 
-import StudyRoom.StudyRoom.Dto.roomDto;
+import StudyRoom.StudyRoom.Room.roomDto;
 import StudyRoom.StudyRoom.repository.reservationRepository;
 import StudyRoom.StudyRoom.repository.roomRepository;
 import lombok.RequiredArgsConstructor;
