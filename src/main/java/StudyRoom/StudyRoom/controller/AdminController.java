@@ -53,6 +53,7 @@ public class AdminController {
     // 스터디룸 설명 변경
 
     @GetMapping("/admin/change")
+    // Pathvariable 로 변수 받기
     public String ChangeRoom(){
 
 

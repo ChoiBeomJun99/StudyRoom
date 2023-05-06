@@ -4,19 +4,18 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 
-import java.util.Date;
-
 @Entity
-public class reservation {
+public class room {
 
-    // 예약일 기본 키
     @Id @GeneratedValue
-    Long possibleDtid;
-
-    // 예약 가능 일자
-    Date possibleRoomDt;
-
     Long roomId;
+
+    // 스터디 룸 가격
+    Long roomPrice;
+
+    // 수용 가능 인원
+    Integer roomPerson;
+
 
 
 
