@@ -3,9 +3,11 @@ package StudyRoom.StudyRoom.Room;
 import StudyRoom.StudyRoom.entity.room;
 import StudyRoom.StudyRoom.repository.roomRepository;
 import jakarta.transaction.Transactional;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
+@Getter
 public class roomDto {
 
     final roomRepository roomRepository;
