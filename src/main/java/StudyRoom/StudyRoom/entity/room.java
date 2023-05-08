@@ -4,8 +4,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Lob;
+import lombok.Getter;
 
 @Entity
+@Getter
 public class room {
 
     @Id @GeneratedValue
@@ -22,14 +24,14 @@ public class room {
 
     // 스터티 룸 설명
     @Lob
-    String information;
+    String roomInformation;
 
 
     public room(String roomName, Long roomPerson, Long roomPrice, String roomInformation) {
         this.roomName = roomName;
         this.roomPerson = roomPerson;
         this.roomPrice = roomPrice;
-        this.information = roomInformation;
+        this.roomInformation = roomInformation;
     }
 
     public room() {

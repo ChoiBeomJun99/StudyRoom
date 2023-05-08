@@ -29,8 +29,6 @@ public class AdminController {
 
         // 관리자 인증 기능 구현 필요
 
-        // 인증 성공 시 -> model 에 현재 존재하는 방 리스트를 담아주어서 return 해준다
-
         model.addAttribute("room",roomRepository.findAll());
         return "admin/main";
 

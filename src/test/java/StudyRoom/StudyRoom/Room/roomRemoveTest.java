@@ -36,6 +36,7 @@ public class roomRemoveTest {
 
     }
 
+    // 제거할 스터디 룸이 존재하지 않는 경우
     @Test
     void 룸_제거_실패() {
 

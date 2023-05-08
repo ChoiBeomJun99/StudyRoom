@@ -8,7 +8,37 @@
 
 <h1>관리자 메인 페이지 입니다. 스터디 룸 추가 및 삭제와 설명 추가를 할 수 있습니다.</h1>
 
-<h2>타임리프를 통해 현재 존재하는 방을 출력해줄 예정</h2>
+<table class="room">
+    <p>
+        <tr>
+            <td>id</font></td>
+            <td></td>
+            <td>이름</td>
+            <td></td>
+            <td>수용 인원</td>
+            <td></td>
+            <td>가격</td>
+            <td></td>
+            <td>설명</td>
+
+
+
+        </tr>
+
+        <tr th:each="room : ${room}">
+            <td th:text="${room.roomId}"></td>
+            <td></td>
+            <td th:text="${room.roomName}"></td>
+            <td></td>
+            <td th:text="${room.roomPerson}"></td>
+            <td></td>
+            <td th:text="${room.roomPrice}"></td>
+            <td></td>
+            <td th:text="${room.roomInformation}"></td>
+            <td></td>
+
+        </tr>
+</table>
 
 
 <br>
