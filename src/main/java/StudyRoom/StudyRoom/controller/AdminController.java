@@ -5,11 +5,13 @@ import StudyRoom.StudyRoom.Room.roomDto;
 import StudyRoom.StudyRoom.entity.room;
 import StudyRoom.StudyRoom.repository.reservationRepository;
 import StudyRoom.StudyRoom.repository.roomRepository;
+import StudyRoom.StudyRoom.service.admin.changeReview;
 import StudyRoom.StudyRoom.service.admin.removeRoom;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -48,8 +50,6 @@ public class AdminController {
 
         if(roomRepository.findByroomName(add_name).isEmpty()){
 
-            System.out.println("성공 시");
-
             roomDto roomDto = new roomDto(roomRepository);
             roomDto.create_room(add_name,add_person,add_price,add_information);
 
@@ -60,7 +60,7 @@ public class AdminController {
 
         else{
             model.addAttribute("add_fail","이미 존재하는 스터디 룸 입니다.");
-            return "admin/add_fail";
+            return "admin/alert/add_fail";
         }
     }
 
@@ -75,22 +75,46 @@ public class AdminController {
         if(removeRoom.removeRoom(remove_name)==false){
 
             model.addAttribute("remove_fail","존재하지 않는 스터디 룸 입니다.");
-            return "admin/remove_fail";
+            return "admin/alert/remove_fail";
         }
 
         // 룸 정상 제거 시
         else{
             model.addAttribute("remove_success",remove_name + " 룸이 제거되었습니다.");
-            return "admin/remove_success";
+            return "admin/alert/remove_success";
         }
 
     }
 
     // 스터디룸 설명 변경
     @GetMapping("/admin/change")
-    // Pathvariable 로 변수 받기
-    public String ChangeRoom(@RequestParam("change_name") String change_name){
+    public String GetChangeRoom(@RequestParam("change_name") String change_name, Model model){
 
+        changeReview changeReview = new changeReview(roomRepository);
+
+        // 존재하지 않는 스터디 룸인 경우
+        if(changeReview.exist(change_name)==false){
+            model.addAttribute("change_fail","존재하지 않는 스터디 룸 입니다.");
+            return "admin/alert/change_fail";
+        }
+
+        room rooms = (room) roomRepository.findByroomName(change_name);
+
+
+        // 존재하는 스터디 룸인 경우
+        model.addAttribute("roomName",change_name);
+
+        model.addAttribute("roomInformation",rooms.getRoomInformation());
+
+        return "admin/change";
+    }
+
+
+    @PostMapping("/admin/change")
+
+    // Pathvariable 로 변수 받기
+    public String PostChangeRoom(@PathVariable String roomName){
+        System.out.println(roomName);
         return "00";
     }
 
