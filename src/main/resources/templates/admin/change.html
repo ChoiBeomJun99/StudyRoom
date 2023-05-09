@@ -6,10 +6,25 @@
 </head>
 <body>
 
-change page 입니다.
+<form method="post" action="admin/change">
 
-<h1 th:text="${roomName}">기본 메시지</h1>
-<h1 th:text="${roomInformation}">기본 메시지</h1>
+  <h1 th:text="${roomName} + ' 룸 리뷰 수정 페이지'" name="roomName"></h1>
+  <br><br><br><br>
+  <h2>리뷰 수정하기</h2>
+
+  <textarea cols="50" rows="8" th:text="${roomInformation}" name="roomInformation">
+
+  </textarea>
+<br>
+  &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+  &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+  &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+  &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+  <button type="submit">수정 완료</button>
+</form>
+
+
+
 
 </body>
 </html>

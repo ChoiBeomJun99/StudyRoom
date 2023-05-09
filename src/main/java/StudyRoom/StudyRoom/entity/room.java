@@ -5,6 +5,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Lob;
 import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Getter
@@ -23,7 +24,7 @@ public class room {
     Long roomPrice;
 
     // 스터티 룸 설명
-    @Lob
+    @Lob @Setter
     String roomInformation;
 
 

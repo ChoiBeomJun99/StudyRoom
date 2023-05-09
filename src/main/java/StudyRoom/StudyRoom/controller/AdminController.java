@@ -31,10 +31,13 @@ public class AdminController {
 
         // 관리자 인증 기능 구현 필요
 
+        // 인증 실패 시
+
+
+        // 인증 성공 시
+
         model.addAttribute("room",roomRepository.findAll());
         return "admin/main";
-
-        // 인증 실패 시
 
     }
     // 스터디룸 추가
@@ -79,6 +82,7 @@ public class AdminController {
         }
 
         // 룸 정상 제거 시
+
         else{
             model.addAttribute("remove_success",remove_name + " 룸이 제거되었습니다.");
             return "admin/alert/remove_success";
@@ -87,24 +91,25 @@ public class AdminController {
     }
 
     // 스터디룸 설명 변경
-    @GetMapping("/admin/change")
+    @GetMapping("/admin/change") // 왜 url 뒤에 change_name 이 붙는지?
     public String GetChangeRoom(@RequestParam("change_name") String change_name, Model model){
 
         changeReview changeReview = new changeReview(roomRepository);
 
         // 존재하지 않는 스터디 룸인 경우
+
         if(changeReview.exist(change_name)==false){
             model.addAttribute("change_fail","존재하지 않는 스터디 룸 입니다.");
             return "admin/alert/change_fail";
         }
 
-        room rooms = (room) roomRepository.findByroomName(change_name);
-
-
         // 존재하는 스터디 룸인 경우
-        model.addAttribute("roomName",change_name);
 
-        model.addAttribute("roomInformation",rooms.getRoomInformation());
+        List rooms = roomRepository.findByroomName(change_name);
+        room room = (StudyRoom.StudyRoom.entity.room) rooms.get(0);
+
+        model.addAttribute("roomName",change_name);
+        model.addAttribute("roomInformation",room.getRoomInformation());
 
         return "admin/change";
     }
@@ -112,10 +117,15 @@ public class AdminController {
 
     @PostMapping("/admin/change")
 
-    // Pathvariable 로 변수 받기
-    public String PostChangeRoom(@PathVariable String roomName){
-        System.out.println(roomName);
-        return "00";
+    public String PostChangeRoom(@RequestParam("roomName") String roomName, @RequestParam("roomInformation") String roomInformation){
+
+        System.out.println("asdasdasdasd");
+        List rooms = roomRepository.findByroomName(roomName);
+        room room = (StudyRoom.StudyRoom.entity.room) rooms.get(0);
+
+        room.setRoomInformation(roomInformation);
+
+        return "redirect:/admin";
     }
 
 }
