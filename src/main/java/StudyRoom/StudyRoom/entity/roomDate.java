@@ -1,8 +1,6 @@
 package StudyRoom.StudyRoom.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.util.Date;
 
@@ -11,8 +9,12 @@ public class roomDate extends BaseTimeEntity{
 
     @Id
     @GeneratedValue
-    Long roomId;
-
+    Long id;
 
     Date date;
+
+    @ManyToOne
+    @JoinColumn(name = "roomName")
+    private room room;
+
 }

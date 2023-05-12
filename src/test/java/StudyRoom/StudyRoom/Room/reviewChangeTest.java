@@ -19,7 +19,6 @@ import java.util.List;
 public class reviewChangeTest {
 
     @Autowired roomRepository roomRepository;
-
     @Test
     void 리뷰_변경_성공() {
 
@@ -78,7 +77,4 @@ public class reviewChangeTest {
         Assertions.assertThat(origin_date).isNotEqualTo(modify_date);
 
     }
-
-
-
 }

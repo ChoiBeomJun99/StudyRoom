@@ -1,9 +1,6 @@
 package StudyRoom.StudyRoom.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Lob;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,6 +12,7 @@ public class room extends BaseTimeEntity{
     Long roomId;
 
     // 스터디 룸 이름
+    @Column(name = "roomName")
     String roomName;
 
     // 수용 가능 인원
