@@ -9,7 +9,7 @@ import lombok.Setter;
 
 @Entity
 @Getter
-public class room {
+public class room extends BaseTimeEntity{
 
     @Id @GeneratedValue
     Long roomId;
@@ -27,14 +27,12 @@ public class room {
     @Lob @Setter
     String roomInformation;
 
-
     public room(String roomName, Long roomPerson, Long roomPrice, String roomInformation) {
         this.roomName = roomName;
         this.roomPerson = roomPerson;
         this.roomPrice = roomPrice;
         this.roomInformation = roomInformation;
     }
-
     public room() {
 
     }

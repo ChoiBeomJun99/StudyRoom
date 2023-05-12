@@ -13,7 +13,6 @@ import org.springframework.test.annotation.Rollback;
 import java.util.List;
 
 @SpringBootTest
-@Rollback
 @Transactional
 public class reviewChangeTest {
 

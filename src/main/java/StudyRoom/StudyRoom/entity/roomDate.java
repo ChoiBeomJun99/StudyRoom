@@ -7,17 +7,12 @@ import jakarta.persistence.Id;
 import java.util.Date;
 
 @Entity
-public class reservation extends BaseTimeEntity{
+public class roomDate extends BaseTimeEntity{
 
-    // 예약일 기본 키
-    @Id @GeneratedValue
-    Long possibleDtid;
-
-    // 예약 가능 일자
-    Date possibleRoomDt;
-
+    @Id
+    @GeneratedValue
     Long roomId;
 
 
-
+    Date date;
 }
