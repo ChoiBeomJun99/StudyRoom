@@ -7,7 +7,7 @@ import jakarta.persistence.Id;
 import java.util.Date;
 
 @Entity
-public class reservation {
+public class reservation extends BaseTimeEntity{
 
     // 예약일 기본 키
     @Id @GeneratedValue
