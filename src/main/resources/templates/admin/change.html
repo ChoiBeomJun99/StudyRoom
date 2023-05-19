@@ -6,16 +6,19 @@
 </head>
 <body>
 
-<form method="post" action="admin/change">
+<form method="post" action="change">
 
-  <h1 th:text="${roomName} + ' 룸 리뷰 수정 페이지'" name="roomName"></h1>
+  <h1 th:text="${roomName} + ' 룸 리뷰 수정 페이지'"></h1>
   <br><br><br><br>
   <h2>리뷰 수정하기</h2>
 
+
   <textarea cols="50" rows="8" th:text="${roomInformation}" name="roomInformation">
 
+
   </textarea>
-<br>
+  <input type="hidden" name="roomName" th:value="${roomName}">
+  <br>
   &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
   &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
   &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp

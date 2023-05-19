@@ -1,11 +1,13 @@
 package StudyRoom.StudyRoom.service.admin;
 
 import StudyRoom.StudyRoom.repository.roomRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
 
 @RequiredArgsConstructor
+@Transactional
 public class removeRoom {
 
     final roomRepository roomRepository;

@@ -11,7 +11,7 @@ import static StudyRoom.StudyRoom.entity.MemberRole.USER;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "MEMBER")
-public class Member {
+public class Member extends BaseTimeEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

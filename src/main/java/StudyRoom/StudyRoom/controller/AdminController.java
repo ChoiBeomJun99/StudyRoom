@@ -11,13 +11,16 @@ import StudyRoom.StudyRoom.repository.roomRepository;
 import StudyRoom.StudyRoom.service.admin.AdminService;
 import StudyRoom.StudyRoom.service.admin.changeReview;
 import StudyRoom.StudyRoom.service.admin.removeRoom;
+
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -158,14 +161,13 @@ public class AdminController {
 
 
     @PostMapping("/admin/change")
-
+    @Transactional
     public String PostChangeRoom(@RequestParam("roomName") String roomName, @RequestParam("roomInformation") String roomInformation){
 
-        System.out.println("asdasdasdasd");
-        List rooms = roomRepository.findByroomName(roomName);
-        room room = (StudyRoom.StudyRoom.entity.room) rooms.get(0);
+        changeReview changeReview = new changeReview(roomRepository);
+        changeReview.changeReview(roomName,roomInformation);
 
-        room.setRoomInformation(roomInformation);
+
 
         return "redirect:/admin";
     }
