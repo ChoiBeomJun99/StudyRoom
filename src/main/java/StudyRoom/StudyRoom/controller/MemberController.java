@@ -2,12 +2,16 @@ package StudyRoom.StudyRoom.controller;
 
 import StudyRoom.StudyRoom.Room.LoginDTO;
 import StudyRoom.StudyRoom.Room.SignUpDTO;
+import StudyRoom.StudyRoom.entity.Member;
 import StudyRoom.StudyRoom.service.MemberService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -31,7 +35,7 @@ public class MemberController {
     }
 
     @PostMapping("/signUp")
-    public ResponseEntity signUp(@ModelAttribute SignUpDTO signUpDTO){
+    public ResponseEntity signUp(@ModelAttribute SignUpDTO signUpDTO, Model model){
         if(!isRegexEmail(signUpDTO.getEmail())){
             return new ResponseEntity("Invalid email format", HttpStatus.BAD_REQUEST);
         }
@@ -39,20 +43,37 @@ public class MemberController {
         ResponseEntity response = memberService.signUp(signUpDTO);
 
         if (response.getStatusCode() == HttpStatus.OK) {
+            model.addAttribute("success", response.getBody().toString());
             return ResponseEntity.status(HttpStatus.FOUND).header("Location", "/login").build();
         } else {
+            model.addAttribute("error", response.getBody().toString());
             return response;
         }
     }
 
     @PostMapping("/login")
-    public ResponseEntity login(@ModelAttribute LoginDTO loginDTO){
+    public String login(@ModelAttribute LoginDTO loginDTO, HttpSession session, Model model){
+
         ResponseEntity response = memberService.login(loginDTO);
 
         if (response.getStatusCode() == HttpStatus.OK) {
-            return ResponseEntity.status(HttpStatus.FOUND).header("Location", "/").build();
+            Member member = memberService.getMemberByEmail(loginDTO.getEmail());
+            session.setAttribute("member", member);
+            model.addAttribute("member", member);
+
+//            model.addAttribute("success", response.getBody().toString());
+            return "redirect:/";
         } else {
-            return response;
+            model.addAttribute("error", response.getBody().toString());
+            return "member/login";
         }
+    }
+
+    @PostMapping("/logout")
+    public String logout(HttpServletRequest request) {
+        
+        request.getSession().removeAttribute("member");
+
+        return "redirect:/";
     }
 }

@@ -1,3 +1,4 @@
+<!-- 메인 홈페이지 -->
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
@@ -5,13 +6,43 @@
     <title>메인 홈페이지</title>
 </head>
 <body>
-  <h1>환영합니다^^</h1>
-  <h3>메인페이지~~</h3>
-    <div class="login">
-        <label><a href="login">login</a></label>
+<div>
+    <h1 th:if="${session.member != null}" th:text="'환영합니다, ' + ${session.member.name} + '님'"></h1>
+    <h1 th:if="${session.member == null}">로그인 해주세요</h1>
+</div>
+<div>
+    <h3>메인페이지~~</h3>
+</div>
+
+
+<h3>방 목록</h3>
+<div th:if="${session.member != null}">
+    <table>
+        <tr th:each="room : ${room}">
+            <td th:text="${room.roomId}"></td>
+            <td></td>
+            <td th:text="${room.roomName}"></td>
+            <td></td>
+            <td th:text="${room.roomPerson}"></td>
+            <td></td>
+            <td th:text="${room.roomPrice}"></td>
+            <td></td>
+            <td th:text="${room.roomInformation}"></td>
+            <td></td>
+        </tr>
+    </table>
+</div>
+
+<div th:if="${session.member == null}" class="login">
+    <label><a href="login">로그인</a></label>
+</div>
+<div th:if="${session.member == null}" class="signUp">
+    <label><a href="signUp">회원가입</a></label>
+</div>
+    <div th:if="${session.member != null}" class="logout">
+        <form action="/logout" method="post">
+            <button type="submit">로그아웃</button>
+        </form>
     </div>
-  <div class="signUp">
-      <label><a href="signUp">sign up</a></label>
-  </div>
 </body>
 </html>

@@ -3,6 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <title>SignUp Page</title>
+  <script th:if="${not #strings.isEmpty(success)}">
+    window.onload = function() {
+      alert([[${success}]]);
+    };
+  </script>
 </head>
 <body>
   <div>
