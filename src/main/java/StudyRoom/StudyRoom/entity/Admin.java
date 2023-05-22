@@ -3,30 +3,29 @@ package StudyRoom.StudyRoom.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-import static StudyRoom.StudyRoom.entity.MemberRole.USER;
+import static StudyRoom.StudyRoom.entity.MemberRole.ADMIN;
 
 @Entity
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "MEMBER")
-public class Member extends BaseTimeEntity{
+@Table(name = "ADMIN")
+public class Admin {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long memberId;
+    private Long adminId;
+
 
     @Column(nullable = false)
-    private String email;
+    private String id;
 
     @Column(nullable = false)
     private String password;
 
-    @Column(nullable = false)
-    private String name;
     @Enumerated(EnumType.STRING)
-    private MemberRole role = USER;
+    private MemberRole role = ADMIN;
 
 }
 

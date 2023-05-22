@@ -60,5 +60,10 @@
 
 </form>
 
+<div th:if="${session.admin != null}" class="logout">
+    <form action="admin/logout" method="post">
+        <button type="submit">로그아웃</button>
+    </form>
+</div>
 </body>
 </html>
