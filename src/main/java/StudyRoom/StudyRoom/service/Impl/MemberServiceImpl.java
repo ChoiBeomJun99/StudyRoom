@@ -4,6 +4,7 @@ import StudyRoom.StudyRoom.Room.LoginDTO;
 import StudyRoom.StudyRoom.Room.SignUpDTO;
 import StudyRoom.StudyRoom.entity.Member;
 import StudyRoom.StudyRoom.repository.MemberRepository;
+import StudyRoom.StudyRoom.security.WebSecurityConfig;
 import StudyRoom.StudyRoom.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.OptimisticLockingFailureException;
@@ -21,9 +22,13 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public ResponseEntity signUp(SignUpDTO memberDTO) throws IllegalArgumentException{
+
+        WebSecurityConfig webSecurityConfig = new WebSecurityConfig();
+        String new_password =  webSecurityConfig.getPasswordEncoder().encode(memberDTO.getPassword());
+
         Member member = Member.builder()
                 .email(memberDTO.getEmail())
-                .password(memberDTO.getPassword())
+                .password(new_password)
                 .name(memberDTO.getName())
                 .build();
 
