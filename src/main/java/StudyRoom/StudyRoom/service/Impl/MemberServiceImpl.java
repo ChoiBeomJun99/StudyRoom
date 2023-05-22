@@ -48,8 +48,15 @@ public class MemberServiceImpl implements MemberService {
         if (member.getPassword().equals(loginDTO.getPassword())){
             return new ResponseEntity("로그인 되었습니다.", HttpStatus.OK);
         } else {
-            return new ResponseEntity("비밀번호가 일치하지 않습니다.", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity("회원 정보가 일치하지 않습니다.", HttpStatus.BAD_REQUEST);
         }
 
+    }
+
+    @Override
+    public Member getMemberByEmail(String email){
+        Member member = memberRepository.findByEmail(email);
+
+        return member;
     }
 }

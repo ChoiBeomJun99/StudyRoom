@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>adminLogin</title>
+</head>
+<body>
+<div class="container">
+  <form class="adminLogin" action="login" method="post">
+
+    <label for="id" class="idLabel">id</label>
+    <input type="text" id="id" name="id" class="id" placeholder="id" required>
+
+    <label for="password" class="passwordLabel">Password</label>
+    <input type="password" id="password" name="password" class="password" placeholder="password" required>
+
+    <div th:if="${error}" class="error">
+      <p th:text="${error}"></p>
+    </div>
+
+    <button class="submit" type="submit">로그인</button>
+  </form>
+</div>
+</body>
+</html>

@@ -1,21 +1,31 @@
 package StudyRoom.StudyRoom.controller;
 
 
+import StudyRoom.StudyRoom.Room.AdminLoginDTO;
 import StudyRoom.StudyRoom.Room.roomDto;
+import StudyRoom.StudyRoom.entity.Admin;
+import StudyRoom.StudyRoom.entity.Member;
 import StudyRoom.StudyRoom.entity.room;
 import StudyRoom.StudyRoom.repository.reservationRepository;
 import StudyRoom.StudyRoom.repository.roomRepository;
+import StudyRoom.StudyRoom.service.admin.AdminService;
 import StudyRoom.StudyRoom.service.admin.changeReview;
 import StudyRoom.StudyRoom.service.admin.removeRoom;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
+import static StudyRoom.StudyRoom.entity.MemberRole.ADMIN;
 
 
 @Controller
@@ -25,21 +35,56 @@ public class AdminController {
     final reservationRepository reservationRepository;
     final roomRepository roomRepository;
 
+    private final AdminService adminService;
+
     // 관리자 메인 페이지
     @GetMapping("/admin")
-    public String AdminMain(Model model){
-
+    public String AdminMain(Model model, HttpSession session){
         // 관리자 인증 기능 구현 필요
+        Admin admin = (Admin) session.getAttribute("admin");
 
         // 인증 실패 시
-
+        if (admin == null || admin.getRole() != ADMIN) {
+            return "redirect:/admin/login";
+        }
 
         // 인증 성공 시
-
         model.addAttribute("room",roomRepository.findAll());
         return "admin/main";
-
     }
+
+    @GetMapping("/admin/login")
+    public String AdminLoginPage(){
+        return "admin/adminLogin";
+    }
+
+    @PostMapping("/admin/login")
+    public String AdminLogin(@ModelAttribute AdminLoginDTO adminLoginDTO, HttpSession session, Model model){
+        ResponseEntity response = adminService.login(adminLoginDTO);
+
+        if(response.getStatusCode() == HttpStatus.OK){
+            Admin admin = adminService.getAdminById(adminLoginDTO.getId());
+            session.setAttribute("admin", admin);
+            model.addAttribute("admin", admin);
+
+            model.addAttribute("success", response.getBody().toString());
+            return "redirect:/admin";
+        } else {
+            model.addAttribute("error", response.getBody().toString());
+            return "admin/adminLogin";
+        }
+    }
+
+    @PostMapping("/admin/logout")
+    public String logout(HttpServletRequest request) {
+        // 세션 무효화
+        request.getSession().removeAttribute("admin");
+
+        return "redirect:/admin";
+    }
+
+
+
     // 스터디룸 추가
     @GetMapping("/admin/add")
     public String AddRoom(){

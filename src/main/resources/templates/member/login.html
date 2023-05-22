@@ -14,6 +14,10 @@
       <label for="password" class="passwordLabel">Password</label>
       <input type="password" id="password" name="password" class="password" placeholder="password" required>
 
+      <div th:if="${error}" class="error">
+        <p th:text="${error}"></p>
+      </div>
+
       <button class="submit" type="submit">login</button>
       <div class="signUp">
         <label><a href="signUp">sign up</a></label>
