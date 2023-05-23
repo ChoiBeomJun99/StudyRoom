@@ -1,6 +1,7 @@
 package StudyRoom.StudyRoom.Room;
 
 import StudyRoom.StudyRoom.repository.roomRepository;
+import jakarta.transaction.Transactional;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import java.util.List;
 
 @SpringBootTest
 @Rollback
+@Transactional
 class roomCreateTest {
 
     @Autowired roomRepository roomRepository;

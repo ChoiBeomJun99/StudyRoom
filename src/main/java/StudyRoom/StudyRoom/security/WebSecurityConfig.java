@@ -9,9 +9,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
-public class WebSecurityConfig {
+public class WebSecurityConfig{
     @Bean
-    public static PasswordEncoder getPasswordEncoder() {
+    public static BCryptPasswordEncoder getPasswordEncoder() {
         return new BCryptPasswordEncoder();
     }
 

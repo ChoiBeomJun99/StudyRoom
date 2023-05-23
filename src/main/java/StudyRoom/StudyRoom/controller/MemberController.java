@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,13 +27,15 @@ import static StudyRoom.StudyRoom.utils.ValidationRegex.isRegexEmail;
 
 @RequiredArgsConstructor
 @Controller
+
 public class MemberController {
 
 
     @Autowired
     private final MemberService memberService;
     final MemberRepository memberRepository;
-    final PasswordEncoder pwEncoder;
+    final WebSecurityConfig webSecurityConfig;
+    final BCryptPasswordEncoder bCryptPasswordEncoder;
 
 
     @GetMapping("/signUp")
@@ -64,16 +67,6 @@ public class MemberController {
     // 로그인
     @PostMapping("/login")
     public String login(@ModelAttribute LoginDTO loginDTO, HttpSession session, Model model) {
-
-        // 복호화 후 비밀번호 비교 기능 필요
-
-        String origin_pw = pwEncoder.encode(loginDTO.getPassword());
-        String secure_pw = memberRepository.findByEmail(loginDTO.getEmail()).getPassword();
-
-        System.out.println(origin_pw);
-        System.out.println(secure_pw);
-
-        System.out.println(pwEncoder.matches(origin_pw,secure_pw));
 
         ResponseEntity response = memberService.login(loginDTO);
 
