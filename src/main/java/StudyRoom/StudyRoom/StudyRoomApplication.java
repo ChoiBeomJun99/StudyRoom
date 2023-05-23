@@ -1,5 +1,6 @@
 package StudyRoom.StudyRoom;
 
+import StudyRoom.StudyRoom.service.admin.AdminSignUp;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
@@ -13,5 +14,6 @@ public class StudyRoomApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(StudyRoomApplication.class, args);
 	}
+
 
 }

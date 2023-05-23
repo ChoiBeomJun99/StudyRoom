@@ -21,7 +21,6 @@ public class AdminService {
             return new ResponseEntity("해당 아이디를 가진 관리자가 존재하지 않습니다.", HttpStatus.NOT_FOUND);
         }
 
-        // 암호화같은거 신경 안씀
         if (admin.getPassword().equals(adminLoginDTO.getPassword())){
             return new ResponseEntity("로그인 되었습니다.", HttpStatus.OK);
         } else {
